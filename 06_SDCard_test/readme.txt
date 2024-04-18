@@ -1,6 +1,6 @@
 /*!
     \file    readme.txt
-    \brief   description of EXMC SDRAM demo
+    \brief   description of SD Card demo
 
     \version 2022-04-18, V2.0.0, demo for GD32F4xx
 */
@@ -34,15 +34,6 @@ OF SUCH DAMAGE.
 
 /*
 
-SDRAM例程，对板载32MB SDRAM进行全扫，对所有地址写入后再读取，比对数据是否一致
-
-USB线连接板载USB转串口，SDRAM初始化完成后打印SDRAM initialized!
-如果测试通过，则打印SDRAM test successed!，失败则打印SDRAM test failed!
-
-注意！！！
-例程在配置SDRAM时序时，RASD、RPD、RCD均进行了一定程度的超频，如果发现测试失败可尝试将这三个值都加1
-
-MCU: GD32F470IIH6
-SDRAM: IS42S32800J-7BL
+使用板载的Micro SD(TF)插槽，写1个block读1个block
 
 */
