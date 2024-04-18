@@ -34,7 +34,7 @@ OF SUCH DAMAGE.
 
 /*
 
-Micro-SD(TF)©╗╡Бйт
+Micro-SD(TF)©╗╡Бйтё╛п╢1╦Жblockты╤а1╦Жblock
 
 */
 
