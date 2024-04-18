@@ -44,35 +44,35 @@ OF SUCH DAMAGE.
 */
 void spi_flash_init(void)
 {
-    spi_parameter_struct spi_init_struct;
+	spi_parameter_struct spi_init_struct;
 
-    rcu_periph_clock_enable(RCU_GPIOF);
-    rcu_periph_clock_enable(RCU_SPI4);
+	rcu_periph_clock_enable(RCU_GPIOF);
+	rcu_periph_clock_enable(RCU_SPI4);
 
-    /* SPI4_CLK(PF7), SPI4_MISO(PF8), SPI4_MOSI(PF9) GPIO pin configuration */
-    gpio_af_set(GPIOF, GPIO_AF_5, GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9);
-    gpio_mode_set(GPIOF, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9);
-    gpio_output_options_set(GPIOF, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9);
+	/* SPI4_CLK(PF7), SPI4_MISO(PF8), SPI4_MOSI(PF9) GPIO pin configuration */
+	gpio_af_set(GPIOF, GPIO_AF_5, GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9);
+	gpio_mode_set(GPIOF, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9);
+	gpio_output_options_set(GPIOF, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9);
 
-    /* SPI4_CS(PF6) GPIO pin configuration */
-    gpio_mode_set(GPIOF, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_6);
-    gpio_output_options_set(GPIOI, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_6);
+	/* SPI4_CS(PF6) GPIO pin configuration */
+	gpio_mode_set(GPIOF, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_6);
+	gpio_output_options_set(GPIOI, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_6);
 
-    /* chip select invalid */
-    SPI_FLASH_CS_HIGH();
+	/* chip select invalid */
+	SPI_FLASH_CS_HIGH();
 
-    /* SPI4 parameter config */
-    spi_init_struct.trans_mode           = SPI_TRANSMODE_FULLDUPLEX;
-    spi_init_struct.device_mode          = SPI_MASTER;
-    spi_init_struct.frame_size           = SPI_FRAMESIZE_8BIT;
+	/* SPI4 parameter config */
+	spi_init_struct.trans_mode           = SPI_TRANSMODE_FULLDUPLEX;
+	spi_init_struct.device_mode          = SPI_MASTER;
+	spi_init_struct.frame_size           = SPI_FRAMESIZE_8BIT;
 	spi_init_struct.clock_polarity_phase = SPI_CK_PL_HIGH_PH_2EDGE;
-    spi_init_struct.nss                  = SPI_NSS_SOFT;
-    spi_init_struct.prescale             = SPI_PSC_2;
-    spi_init_struct.endian               = SPI_ENDIAN_MSB;
-    spi_init(SPI4, &spi_init_struct);
+	spi_init_struct.nss                  = SPI_NSS_SOFT;
+	spi_init_struct.prescale             = SPI_PSC_2;
+	spi_init_struct.endian               = SPI_ENDIAN_MSB;
+	spi_init(SPI4, &spi_init_struct);
 
-    /* enable SPI4 */
-    spi_enable(SPI4);
+	/* enable SPI4 */
+	spi_enable(SPI4);
 }
 
 /*!
