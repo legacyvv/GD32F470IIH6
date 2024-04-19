@@ -40,9 +40,9 @@ USB线连接板载USB转串口，SDRAM初始化完成后打印SDRAM initialized!
 如果测试通过，则打印SDRAM test successed!，失败则打印SDRAM test failed!
 
 注意！！！
-例程在配置SDRAM时序时，RASD、RPD、RCD均进行了一定程度的超频，如果发现测试失败可尝试将这三个值都加1
+例程在配置SDRAM时序时进行了一定程度的超频，如果发现测试失败可尝试将超过频的值加1
 
 MCU: GD32F470IIH6
-SDRAM: IS42S32800J-7BL
+SDRAM: IS42S32800J-7BL 或 IS42S32800J-6BL
 
 */

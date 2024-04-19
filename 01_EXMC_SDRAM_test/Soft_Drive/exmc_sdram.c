@@ -36,6 +36,8 @@ OF SUCH DAMAGE.
 #include "systick.h"
 #include "exmc_sdram.h"
 
+#define IS42S32800J_7
+
 /* Define mode register content */
 /* Burst Length */
 #define SDRAM_MODEREG_BURST_LENGTH_1             ((uint16_t)0x0000)
@@ -161,10 +163,24 @@ void exmc_synchronous_dynamic_ram_init(uint32_t sdram_device)
 
     /* EXMC SDRAM device initialization sequence --------------------------------*/
     /* Step 1 : configure SDRAM timing registers --------------------------------*/
-	
-	/* timing settings based on IS42S32800J-7BL */
-	
-    /* LMRD: 2 clock cycles */
+#ifdef IS42S32800J_7	
+    /* LMRD: min = 14ns, for 120MHz, equal to 1.68clk, set to 2 */
+    sdram_timing_init_struct.load_mode_register_delay = 2;
+    /* XSRD: min = 70ns, for 120MHz, equal to 8.4clk, set to 9 */
+    sdram_timing_init_struct.exit_selfrefresh_delay = 9;
+	/* RASD: min = 49ns, max=100k (ns), for 120MHz, equal to 5.88clk, set to 6 */
+    sdram_timing_init_struct.row_address_select_delay = 6;
+	/* ARFD: min = 70ns, for 120MHz, equal to 8.4clk, set to 8 (overclocked by 5%) */
+    sdram_timing_init_struct.auto_refresh_delay = 8;
+	/* WRD:  min = 14ns, for 120MHz, equal to 1.68clk, but should not less than RAS - RCD, set to 4 */
+    sdram_timing_init_struct.write_recovery_delay = 4;
+	/* RPD:  min = 20ns, for 120MHz, equal to 2.4clk, set to 3 */
+    sdram_timing_init_struct.row_precharge_delay = 3;
+	/* RCD:  min = 20ns, for 120MHz, equal to 2.4clk, set to 3 */
+    sdram_timing_init_struct.row_to_column_delay = 3;
+#endif
+#ifdef IS42S32800J_6
+	/* LMRD: min = 12ns, for 120MHz, equal to 1.44clk, set to 2 */
     sdram_timing_init_struct.load_mode_register_delay = 2;
     /* XSRD: min = 70ns, for 120MHz, equal to 8.4clk, set to 9 */
     sdram_timing_init_struct.exit_selfrefresh_delay = 9;
@@ -172,13 +188,13 @@ void exmc_synchronous_dynamic_ram_init(uint32_t sdram_device)
     sdram_timing_init_struct.row_address_select_delay = 5;
     /* ARFD: min = 60ns, for 120MHz, equal to 7.2clk, set to 8 */
     sdram_timing_init_struct.auto_refresh_delay = 8;
-    /* WRD:  min = 12ns, for 120MHz, equal to 1.44clk, set to 2 */
-    sdram_timing_init_struct.write_recovery_delay = 2;
+    /* WRD:  min = 12ns, for 120MHz, equal to 1.44clk, but should not less than RAS - RCD, set to 4 */
+    sdram_timing_init_struct.write_recovery_delay = 4;
     /* RPD:  min = 18ns, for 120MHz, equal to 2.16clk, set to 2 (overclocked by 8%) */
     sdram_timing_init_struct.row_precharge_delay = 2;
     /* RCD:  min = 18ns, for 120MHz, equal to 2.16clk, set to 2 (overclocked by 8%) */
     sdram_timing_init_struct.row_to_column_delay = 2;
-
+#endif
     /* step 2 : configure SDRAM control registers ---------------------------------*/
     sdram_init_struct.sdram_device = sdram_device;
     sdram_init_struct.column_address_width = EXMC_SDRAM_COW_ADDRESS_9;
