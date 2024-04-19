@@ -172,8 +172,8 @@ void exmc_synchronous_dynamic_ram_init(uint32_t sdram_device)
     sdram_timing_init_struct.row_address_select_delay = 6;
 	/* ARFD: min = 70ns, for 120MHz, equal to 8.4clk, set to 8 (overclocked by 5%) */
     sdram_timing_init_struct.auto_refresh_delay = 8;
-	/* WRD:  min = 14ns, for 120MHz, equal to 1.68clk, but should not less than RAS - RCD, set to 4 */
-    sdram_timing_init_struct.write_recovery_delay = 4;
+	/* WRD:  min = 14ns, for 120MHz, equal to 1.68clk, but should not less than RAS - RCD, set to 3 */
+    sdram_timing_init_struct.write_recovery_delay = 3;
 	/* RPD:  min = 20ns, for 120MHz, equal to 2.4clk, set to 3 */
     sdram_timing_init_struct.row_precharge_delay = 3;
 	/* RCD:  min = 20ns, for 120MHz, equal to 2.4clk, set to 3 */
@@ -188,8 +188,8 @@ void exmc_synchronous_dynamic_ram_init(uint32_t sdram_device)
     sdram_timing_init_struct.row_address_select_delay = 5;
     /* ARFD: min = 60ns, for 120MHz, equal to 7.2clk, set to 8 */
     sdram_timing_init_struct.auto_refresh_delay = 8;
-    /* WRD:  min = 12ns, for 120MHz, equal to 1.44clk, but should not less than RAS - RCD, set to 4 */
-    sdram_timing_init_struct.write_recovery_delay = 4;
+    /* WRD:  min = 12ns, for 120MHz, equal to 1.44clk, but should not less than RAS - RCD, set to 3 */
+    sdram_timing_init_struct.write_recovery_delay = 3;
     /* RPD:  min = 18ns, for 120MHz, equal to 2.16clk, set to 2 (overclocked by 8%) */
     sdram_timing_init_struct.row_precharge_delay = 2;
     /* RCD:  min = 18ns, for 120MHz, equal to 2.16clk, set to 2 (overclocked by 8%) */
@@ -253,7 +253,7 @@ void exmc_synchronous_dynamic_ram_init(uint32_t sdram_device)
 
     /* step 7 : configure load mode register command-----------------------------*/
     /* program mode register */
-    command_content = (uint32_t)SDRAM_MODEREG_BURST_LENGTH_1   |
+    command_content = (uint32_t)SDRAM_MODEREG_BURST_LENGTH_8   |
                       SDRAM_MODEREG_BURST_TYPE_SEQUENTIAL      |
                       SDRAM_MODEREG_CAS_LATENCY_3              |
                       SDRAM_MODEREG_OPERATING_MODE_STANDARD    |
