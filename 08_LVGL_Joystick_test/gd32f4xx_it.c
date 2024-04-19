@@ -201,13 +201,13 @@ void TIMER1_IRQHandler(void)
 		
 		//printf("%1d", GET_JOY_KEY());
 		
-		if((joystick_value.x < JOY_ADC_THRES) && (pointer_coordinate.x > POINTER_RADIUS))
-			pointer_coordinate.x++;
-		if((joystick_value.x > (JOY_ADC_FULL - JOY_ADC_THRES)) && (pointer_coordinate.x < (ACTIVE_WIDTH - POINTER_RADIUS)))
+		if((joystick_value.x > (JOY_ADC_FULL - JOY_ADC_THRES)) && (pointer_coordinate.x > POINTER_RADIUS))
 			pointer_coordinate.x--;
+		if((joystick_value.x < JOY_ADC_THRES) && (pointer_coordinate.x < (ACTIVE_WIDTH - POINTER_RADIUS - 1)))
+			pointer_coordinate.x++;
 		if((joystick_value.y < JOY_ADC_THRES) && (pointer_coordinate.y > POINTER_RADIUS))
 			pointer_coordinate.y--;
-		if((joystick_value.y > (JOY_ADC_FULL - JOY_ADC_THRES)) && (pointer_coordinate.y < (ACTIVE_HEIGHT - POINTER_RADIUS)))
+		if((joystick_value.y > (JOY_ADC_FULL - JOY_ADC_THRES)) && (pointer_coordinate.y < (ACTIVE_HEIGHT - POINTER_RADIUS - 1)))
 			pointer_coordinate.y++;
 	}
 }
