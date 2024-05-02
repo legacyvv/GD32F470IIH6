@@ -16,3 +16,5 @@ USB转串口：CH340E
 LCD背光驱动：SGM3766
 
 音频放大器：BL6306MM
+
+![image](https://github.com/legacyvv/GD32F470IIH6/blob/main/00_file/pic.jpg)
