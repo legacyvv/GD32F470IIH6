@@ -255,8 +255,8 @@ int main(void)
 	lv_port_disp_init();
 //	lv_port_indev_init();
 	
-//	lv_demo_stress();
-	lv_demo_music();
+	lv_demo_stress();
+//	lv_demo_music();
 	
 //	lv_obj_t* switch_obj = lv_switch_create(lv_scr_act());
 //	lv_obj_set_size(switch_obj, 120, 60);
